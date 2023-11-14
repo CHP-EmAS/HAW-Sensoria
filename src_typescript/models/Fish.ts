@@ -1,0 +1,38 @@
+import { Model, DataTypes} from "sequelize";
+
+import { database, databaseSchema } from "../config/database";
+
+//------- Class for Fish Model-------//
+export class FishModel extends Model {
+    public id!: string;
+    public name!: string;
+    public data!: string;
+    public readonly created_at!: Date;
+}
+
+//------- Init Sequelize-Model -------//
+FishModel.init(
+{
+    id: {
+        type: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false
+    },
+    name: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    data: {
+        type: DataTypes.JSON,
+        allowNull: false,
+    }
+},
+{
+    timestamps: true, 
+    createdAt: 'created_at', 
+    updatedAt: false,
+    freezeTableName: true,
+    tableName: 'fish',
+    sequelize: database,
+    schema: databaseSchema
+});

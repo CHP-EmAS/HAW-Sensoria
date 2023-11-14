@@ -1,0 +1,12 @@
+//400 errors
+export const shortName          = "short_name";
+
+//403 errors
+export const accessForbidden            = "access_forbidden";
+export const insufficientPermissions    = "insufficient_permissions";
+
+//404 errors
+export const fishNotFound       = "fish_not_found";
+
+//invalid errors
+export const invalidData        = "invalid_data";
