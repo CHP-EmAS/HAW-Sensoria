@@ -6,7 +6,7 @@ import * as customError from "../config/errorCodes"
 import { v4 as uuidv4 } from 'uuid';
 
 import { CreateFishInterface } from "../validation/interfaces"
-import {accountDeletionSchema, patchUserSchema} from "../validation/fishValidationSchemas";
+import { createFishSchema } from "../validation/fishValidationSchemas";
 
 import {FishModel} from "../models/Fish";
 
@@ -51,12 +51,19 @@ class FishController {
 
         fish.id = uuidv4();
         fish.name = requestParams.name;
-        fish.data = requestParams.data.toJSON;
+
+        try {
+            JSON.parse(requestParams.raw_data);
+        } catch (e) {
+            return response.status(400).json(toObj(response, {Error: customError.invalidJson}));
+        }
+
+        fish.raw_data = requestParams.raw_data;
     
         try {
             const newFish: FishModel = await fish.save();
 
-            console.log("New Fish created! Name: " + fish.name + " <" + fish.id + ">");
+            console.log("New Fish created! Name: " + fish.name + " <" + fish.id + ">\nData: " + fish.raw_data);
             return response.status(201).json(toObj(response,{ fish_id: fish.id }));
 
         } catch ( error ) {

@@ -6,7 +6,7 @@ import api from "./api";
 const PORT = process.env.PORT || 3000;
 export const API_VERSION = "0.1.0";
 
-console.log("########################## Fish API Version: " + API_VERSION + " ##########################");
+console.log("########################## Sensoria API Version: " + API_VERSION + " ##########################");
 console.log(" ");
 console.log("Starting on Port: " + PORT + " ...");
 console.log(" ");
