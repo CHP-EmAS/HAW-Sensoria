@@ -18,7 +18,7 @@ class FishController {
     public static async getAllFishInfo(request: Request, response: Response) {
         try{
             const fishes: Array<FishModel> = await FishModel.findAll();
-            response.status(200).json(toObj(response,{Fishes: fishes}));
+            response.status(200).json(toObj(response,{fishes: fishes}));
         } catch ( error ) {
             console.error(error);
             response.status(500).json(toObj(response));
@@ -36,7 +36,7 @@ class FishController {
         try{
             const fish: (FishModel | null) = await FishModel.findByPk(requested_fish_id);
             if(!fish) return response.status(404).json(toObj(response, {Error: customError.fishNotFound}));
-            response.status(200).json(toObj(response,{Fish: fish.toJSON()}));
+            response.status(200).json(toObj(response,{fish: fish.toJSON()}));
         } catch {
             response.status(500).json(toObj(response));
         }
