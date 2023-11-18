@@ -5,7 +5,6 @@ import { database, databaseSchema } from "../config/database";
 //------- Class for Fish Model-------//
 export class FishModel extends Model {
     public id!: string;
-    public name!: string;
     public raw_data!: string;
     public readonly created_at!: Date;
 }
@@ -17,10 +16,6 @@ FishModel.init(
         type: DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false
-    },
-    name: {
-        type: DataTypes.TEXT,
-        allowNull: false,
     },
     raw_data: {
         type: DataTypes.TEXT,

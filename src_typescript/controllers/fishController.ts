@@ -12,6 +12,8 @@ import {FishModel} from "../models/Fish";
 
 class FishController {
 
+    private static allowFishCreation: boolean = true;
+
     //GET All Fish Info
     public static async getAllFishInfo(request: Request, response: Response) {
         try{
@@ -42,6 +44,10 @@ class FishController {
 
     //POST Fish
     public static async createFish(request: Request, response: Response) {
+        if(!FishController.allowFishCreation) {
+            return response.status(403).json(toObj(response));
+        }
+
         const requestParams: CreateFishInterface = request.body;
     
         const { error } = createFishSchema.validate(requestParams);
@@ -50,7 +56,6 @@ class FishController {
         let fish = new FishModel();
 
         fish.id = uuidv4();
-        fish.name = requestParams.name;
 
         try {
             JSON.parse(requestParams.raw_data);
@@ -63,7 +68,7 @@ class FishController {
         try {
             const newFish: FishModel = await fish.save();
 
-            console.log("New Fish created! Name: " + fish.name + " <" + fish.id + ">\nData: " + fish.raw_data);
+            console.log("New Fish created! ID: " + fish.id + "\nData: " + fish.raw_data);
             return response.status(201).json(toObj(response,{ fish_id: fish.id }));
 
         } catch ( error ) {
@@ -74,15 +79,18 @@ class FishController {
 
     //PATCH Fish
     public static async patchFish(request: Request, response: Response) {
-         return response.status(500).json(toObj(response));
+         return response.status(501).json(toObj(response));
     }
 
     //DELETE Fish
     public static async deleteFish(request: Request, response: Response) {
-        return response.status(500).json(toObj(response));
+        return response.status(501).json(toObj(response));
     }
 
-   
+    //Toggle Creation
+    public static async toggleFishCreation(request: Request, response: Response) {
+        FishController.allowFishCreation = !FishController.allowFishCreation;
+    }
 }
 
 export default FishController;

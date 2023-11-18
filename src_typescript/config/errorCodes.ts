@@ -1,6 +1,9 @@
 //400 errors
 export const shortName          = "short_name";
 
+//401 errors
+export const tokenRequired          = "token_required";
+
 //403 errors
 export const accessForbidden            = "access_forbidden";
 export const insufficientPermissions    = "insufficient_permissions";

@@ -23,11 +23,11 @@ class API {
 
   public async start(port: String) {
     try {
-      console.log("Connecting to Postgresql on DB: " + process.env.PG_USER + "@" + process.env.PG_HOST + ":" + process.env.PG_PORT +  "/" + process.env.PG_DATABASE + " >> Schema: " + process.env.PG_SCHEMA + " ...")
+      console.log("Connecting to PostgreSQL on DB: " + process.env.PG_USER + "@" + process.env.PG_HOST + ":" + process.env.PG_PORT +  "/" + process.env.PG_DATABASE + " >> Schema: " + process.env.PG_SCHEMA + " ...")
       await database.authenticate()
       console.log('Connection has been established successfully.');
     } catch (error) {
-      console.error('Critical: Cannot connect to Postgresql!\n' + error + "\nDB: " + process.env.PG_USER + "@" + process.env.PG_HOST + ":" + process.env.PG_PORT +  "/" + process.env.PG_DATABASE + " >> Schema: " + process.env.PG_SCHEMA)
+      console.error('Critical: Cannot connect to PostgreSQL!\n' + error + "\nDB: " + process.env.PG_USER + "@" + process.env.PG_HOST + ":" + process.env.PG_PORT +  "/" + process.env.PG_DATABASE + " >> Schema: " + process.env.PG_SCHEMA)
       throw Error("A connection to the database could not be established!");
     }
 
