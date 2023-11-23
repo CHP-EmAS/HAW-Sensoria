@@ -15,3 +15,9 @@ export const patchFishSchema = Joi.object({
         .error(new Error(customError.invalidData)),
 });
 
+export const getLatestFishSchema = Joi.object({
+    from: Joi.date()
+            .min("01.01.2000")
+            .error(new Error(customError.startAfter1900))
+});
+

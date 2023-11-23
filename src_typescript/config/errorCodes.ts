@@ -14,3 +14,4 @@ export const fishNotFound       = "fish_not_found";
 //invalid errors
 export const invalidData        = "invalid_data";
 export const invalidJson        = "invalid_json";
+export const startAfter1900 = "start_after_1900";

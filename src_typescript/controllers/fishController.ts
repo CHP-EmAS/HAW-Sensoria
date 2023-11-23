@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
+import { Op } from "sequelize";
 
 import toObj from "../config/responseStandart"
 import * as customError from "../config/errorCodes"
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { CreateFishInterface } from "../validation/interfaces"
+import { CreateFishInterface, getLatestFishInterface } from "../validation/interfaces"
 import { createFishSchema } from "../validation/fishValidationSchemas";
 
 import {FishModel} from "../models/Fish";
@@ -15,10 +16,26 @@ class FishController {
     private static allowFishCreation: boolean = true;
 
     //GET All Fish Info
-    public static async getAllFishInfo(request: Request, response: Response) {
+    public static async getLatestFishInfo(request: Request, response: Response) {
         try{
-            const fishes: Array<FishModel> = await FishModel.findAll();
-            response.status(200).json(toObj(response,{fishes: fishes}));
+            if(!request.query.from) {
+                const fishes: Array<FishModel> = await FishModel.findAll();
+                return response.status(200).json(toObj(response,{fishes: fishes}));
+            }
+
+            const requestParams: getLatestFishInterface = {from: new Date(request.query.from.toString())};
+
+            const fishes: (Array<FishModel> | null) = await FishModel.findAll({
+                where: {
+                    created_at: {
+                        [Op.gte]: requestParams.from.toUTCString(),
+                    }
+                        
+                }
+            });
+
+            return response.status(200).json(toObj(response,{fishes: fishes}));
+
         } catch ( error ) {
             console.error(error);
             response.status(500).json(toObj(response));

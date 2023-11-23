@@ -9,7 +9,7 @@ import { validatePathParameter } from "../middlewares/validatePathParameter";
 const router = Router({ mergeParams: true })
 
 //fish instance routes
-router.get("/", FishController.getAllFishInfo)
+router.get("/", FishController.getLatestFishInfo)
 router.post("/", FishController.createFish)
 
 router.get("/:id", [validatePathParameter], FishController.getFishInfo)
