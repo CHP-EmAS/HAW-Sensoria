@@ -4,5 +4,5 @@ export interface CreateFishInterface {
 }
 
 export interface getLatestFishInterface {
-    from: Date;
+    after: Date;
 }

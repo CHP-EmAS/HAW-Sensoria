@@ -18,17 +18,17 @@ class FishController {
     //GET All Fish Info
     public static async getLatestFishInfo(request: Request, response: Response) {
         try{
-            if(!request.query.from) {
+            if(!request.query.after) {
                 const fishes: Array<FishModel> = await FishModel.findAll();
                 return response.status(200).json(toObj(response,{fishes: fishes}));
             }
 
-            const requestParams: getLatestFishInterface = {from: new Date(request.query.from.toString())};
+            const requestParams: getLatestFishInterface = {after: new Date(request.query.after.toString())};
 
             const fishes: (Array<FishModel> | null) = await FishModel.findAll({
                 where: {
                     created_at: {
-                        [Op.gte]: requestParams.from.toUTCString(),
+                        [Op.gte]: requestParams.after.toUTCString(),
                     }
                         
                 }
