@@ -8,6 +8,6 @@ router.use('/fonts', express.static('static/fonts'));
 router.use('/script', express.static('static/script'));
 router.use('/img', express.static('static/images'));
 
-router.use("/", express.static("static/html/index.html"));
+router.get("/", express.static("static/html/index.html"));
 
 export default router;
