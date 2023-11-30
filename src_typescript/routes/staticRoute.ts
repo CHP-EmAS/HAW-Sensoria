@@ -5,7 +5,7 @@ const router = Router();
 
 router.use('/css', express.static('static/css'));
 router.use('/fonts', express.static('static/fonts'));
-router.use('/script', express.static('out_javascript/page'));
+router.use('/script', express.static('static/scripts'));
 router.use('/img', express.static('static/images'));
 
 router.get("/", function(req, res) {
