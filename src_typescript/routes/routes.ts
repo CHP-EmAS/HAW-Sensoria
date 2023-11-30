@@ -14,7 +14,6 @@ import { authProtected } from "../middlewares/authenticationHandler"
 const routes = Router();
 
 routes.use("/fish", fishRoute);
-
 routes.post("/toggle", [authProtected], FishController.toggleFishCreation)
 
 routes.use("/", staticRoute);
