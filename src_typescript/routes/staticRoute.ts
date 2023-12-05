@@ -21,7 +21,7 @@ router.get("/Build/:file", function(req, res) {
                 );
             
             
-          res.contentType(req.params.file);
+          //res.contentType(req.params.file);
           res.send(data);
         }   
         res.end();
