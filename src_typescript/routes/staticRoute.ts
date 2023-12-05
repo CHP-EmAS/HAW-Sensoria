@@ -14,12 +14,12 @@ router.get("/Build/:file", function(req, res) {
         } else {
             var fileExt = req.params.file.split('.').pop();
 
-            
-                res.header(
+            if(fileExt == "br") {
+                res.setHeader(
                     "Content-Encoding",
                     "br",
                 );
-            
+            }
             
           res.contentType(req.params.file);
           res.send(data);
