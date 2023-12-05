@@ -12,7 +12,7 @@ router.get("/Build/:file", function(req, res) {
         if(err) {
           res.send("Oops! Couldn't find that file.");
         } else {
-          // set the content type based on the file
+          res.setDefaultEncoding("br")
           res.contentType(req.params.file);
           res.send(data);
         }   
