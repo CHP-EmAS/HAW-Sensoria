@@ -1,9 +1,9 @@
 const cacheName = "Relieable-Wellen Wunder-1.0.0";
 const contentToCache = [
-    "Build/Fish App.loader.js",
-    "Build/Fish App.framework.js",
-    "Build/Fish App.data",
-    "Build/Fish App.wasm",
+    "Build/FishApp.loader.js",
+    "Build/FishApp.framework.js",
+    "Build/FishApp.data",
+    "Build/FishApp.wasm",
     "TemplateData/style.css"
 
 ];
