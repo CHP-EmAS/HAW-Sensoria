@@ -101,7 +101,7 @@ class FishController {
 
     //DELETE Fish
     public static async deleteAllFish() {
-        console.warn("Destroying all Fish! :(")
+        console.log("Destroying all Fish! :(")
 
         try {
             FishModel.destroy();
@@ -113,7 +113,7 @@ class FishController {
     //Toggle Creation
     public static toggleFishCreation() {
         FishController.allowFishCreation = !FishController.allowFishCreation;
-        console.warn("Allow Fish Creation: " + FishController.allowFishCreation)
+        console.log("Allow Fish Creation: " + FishController.allowFishCreation)
     }
 }
 

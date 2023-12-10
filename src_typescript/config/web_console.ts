@@ -84,7 +84,7 @@ class Web_Console {
         };
     }
 
-    private executeCommand(socket: SocketIO.Socket, command: string) {
+    private async executeCommand(socket: SocketIO.Socket, command: string) {
         if(!this.io) return false;
 
         console.log("[web_console] [execute] Socket<" + socket.id + "> executed command '" + command + "'.")
@@ -96,7 +96,7 @@ class Web_Console {
             break;
             case 'list_all':
                 console.log("[web_console] [info] Listing all socket connection...");
-                console.log(this.io.fetchSockets());
+                console.log(await this.io.fetchSockets());
             break;
             case 'toggle_creation':
                 FishController.toggleFishCreation();
