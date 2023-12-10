@@ -30,7 +30,7 @@ class Web_Console {
         this.io = new SocketIO.Server(this.httpServer, {
             path: this.webSocketPath,
             cors: {
-                origin: "https://sensoria.xitem.de",
+                origin: "https://xitem.de",
                 methods: ["GET", "POST"],
                 allowedHeaders: ["user-token"],
                 credentials: true
