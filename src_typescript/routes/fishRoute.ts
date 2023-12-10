@@ -13,7 +13,5 @@ router.get("/", FishController.getLatestFishInfo)
 router.post("/", FishController.createFish)
 
 router.get("/:id", [validatePathParameter], FishController.getFishInfo)
-router.patch("/:id", [validatePathParameter], FishController.patchFish)
-router.delete("/:id", [validatePathParameter], FishController.deleteFish)
 
 export default router
