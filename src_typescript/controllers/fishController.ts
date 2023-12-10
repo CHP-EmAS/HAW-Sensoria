@@ -100,13 +100,20 @@ class FishController {
     }
 
     //DELETE Fish
-    public static async deleteFish(request: Request, response: Response) {
-        return response.status(501).json(toObj(response));
+    public static async deleteAllFish() {
+        console.warn("Destroying all Fish! :(")
+
+        try {
+            FishModel.destroy();
+        } catch ( error ) {
+            console.error(error);
+        }
     }
 
     //Toggle Creation
-    public static async toggleFishCreation(request: Request, response: Response) {
+    public static toggleFishCreation() {
         FishController.allowFishCreation = !FishController.allowFishCreation;
+        console.warn("Allow Fish Creation: " + FishController.allowFishCreation)
     }
 }
 

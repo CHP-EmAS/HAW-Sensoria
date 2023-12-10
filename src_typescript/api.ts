@@ -11,6 +11,7 @@ import CorsHandler from "./middlewares/corsHandler"
 import LogHandler from "./middlewares/logHandler"
 import {database} from "./config/database";
 import Web_Console from "./config/web_console";
+import { validateUserAccess } from "./config/web_console";
 
 class API {
   private server: http.Server;
@@ -23,7 +24,7 @@ class API {
 
     this.initAPI();
 
-    this.console = new Web_Console(this.server);
+    this.console = new Web_Console(this.server, "logging", validateUserAccess);
   }
 
   public async start(port: String) {

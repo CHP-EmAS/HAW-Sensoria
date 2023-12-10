@@ -2,6 +2,7 @@ import {Server} from "http";
 import SocketIO from "socket.io";
 
 import * as customError from "../config/errorCodes"
+import FishController from "../controllers/fishController";
 
 class Web_Console {
 
@@ -59,16 +60,6 @@ class Web_Console {
         return true;
     }
 
-    private handlePreflightRequest(request: any, response: any) {
-        const headers = {
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, user-token",
-            "Access-Control-Allow-Origin": request.headers.origin,
-            "Access-Control-Allow-Credentials": true
-        };
-        response.writeHead(200, headers);
-        response.end();
-    }
-
     private overwriteOutput(io: SocketIO.Server) {
 
         const originalStdoutWrite = process.stdout.write.bind(process.stdout);
@@ -108,10 +99,10 @@ class Web_Console {
                 console.log(this.io.fetchSockets());
             break;
             case 'toggle_creation':
-
+                FishController.toggleFishCreation();
             break;
             case 'delete_all':
-
+                FishController.deleteAllFish();
             break;
         }
     }
