@@ -104,7 +104,7 @@ class FishController {
         console.log("Destroying all Fish! :(")
 
         try {
-            FishModel.destroy();
+            FishModel.truncate();
         } catch ( error ) {
             console.error(error);
         }
