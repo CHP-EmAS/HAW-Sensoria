@@ -29,7 +29,12 @@ class Web_Console {
 
         this.io = new SocketIO.Server(this.httpServer, {
             path: this.webSocketPath,
-            cors: this.handlePreflightRequest
+            cors: {
+                origin: "https://sensoria.xitem.de",
+                methods: ["GET", "POST"],
+                allowedHeaders: ["user-token"],
+                credentials: true
+            }
         });
 
         this.init();

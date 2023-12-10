@@ -67,12 +67,9 @@
                 
                 socket = io.connect( "https://sensoria.xitem.de", {
                     path : "/logging",
-                    transportOptions: {
-                        polling: {
-                            extraHeaders: {
-                                "user-token": document.getElementById("user-token").value
-                            }
-                        }
+                    withCredentials: true,
+                    extraHeaders: {
+                        "user-token": document.getElementById("user-token").value
                     }
                 });
 
