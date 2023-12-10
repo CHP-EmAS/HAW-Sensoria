@@ -96,7 +96,7 @@ class Web_Console {
             break;
             case 'list_all':
                 console.log("[web_console] [info] Listing all socket connection...");
-                console.log(await this.io.fetchSockets());
+                console.log((await this.io.fetchSockets()).map(socket => socket.id));
             break;
             case 'toggle_creation':
                 FishController.toggleFishCreation();
