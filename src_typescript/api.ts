@@ -16,7 +16,7 @@ import { validateUserAccess } from "./config/web_console";
 class API {
   private server: http.Server;
   private api: Application;
-  private console: Web_Console;
+  private webConsole: Web_Console;
 
   constructor() {
     this.api = express();
@@ -24,7 +24,7 @@ class API {
 
     this.initAPI();
 
-    this.console = new Web_Console(this.server, "logging", validateUserAccess);
+    this.webConsole = new Web_Console(this.server, "/logging", validateUserAccess);
   }
 
   public async start(port: String) {
@@ -37,7 +37,7 @@ class API {
       throw Error("A connection to the database could not be established!");
     }
 
-    this.console.start();
+    this.webConsole.start();
     this.server.listen(port, () => console.log(process.env.APP_NAME + " API started on Port: " + port + "!"));
   }
 
