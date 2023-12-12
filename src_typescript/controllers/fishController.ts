@@ -19,9 +19,13 @@ class FishController {
     public static async getLatestFishInfo(request: Request, response: Response) {
         try{
             if(!request.query.after) {
+                console.log("Returning all Fish...");
                 const fishes: Array<FishModel> = await FishModel.findAll();
+                console.log("[200] " + fishes.length + " Fish returned!");
                 return response.status(200).json(toObj(response,{fishes: fishes}));
             }
+
+            console.log("Returning Fish after " + request.query.after.toString() + "...");
 
             const requestParams: getLatestFishInterface = {after: new Date(request.query.after.toString())};
 
@@ -34,10 +38,16 @@ class FishController {
                 }
             });
 
+            console.log("[200] " + fishes.length + " Fish returned! Listing...");
+
+            fishes.forEach(fish => {
+                console.log("- " + fish.id + ", created_at " + fish.created_at.toUTCString + ", Data: " + fish.raw_data);
+            });
+
             return response.status(200).json(toObj(response,{fishes: fishes}));
 
-        } catch ( error ) {
-            console.error(error);
+        } catch ( error: any ) {
+            console.log("[500] Error when returning fish: " + error.message);
             response.status(500).json(toObj(response));
         }
     }
@@ -66,9 +76,14 @@ class FishController {
         }
 
         const requestParams: CreateFishInterface = request.body;
-    
+
         const { error } = createFishSchema.validate(requestParams);
-        if(error) return response.status(400).json(toObj(response,{Error: error.message}));
+        if(error) {
+            console.error("[400] Error when creating the fish: " + error?.message)
+            return response.status(400).json(toObj(response,{Error: error.message}));
+        }
+
+        console.log("Creating new fish...\nData: " + requestParams.raw_data);
 
         let fish = new FishModel();
 
@@ -76,7 +91,8 @@ class FishController {
 
         try {
             JSON.parse(requestParams.raw_data);
-        } catch (e) {
+        } catch (e: any) {
+            console.error("[400] Json Error when creating the fish: " + e.message)
             return response.status(400).json(toObj(response, {Error: customError.invalidJson}));
         }
 
@@ -85,11 +101,11 @@ class FishController {
         try {
             const newFish: FishModel = await fish.save();
 
-            console.log("New Fish created! ID: " + fish.id + "\nData: " + fish.raw_data);
+            console.log("[201] New Fish created! ID: " + fish.id + "\nData: " + fish.raw_data);
             return response.status(201).json(toObj(response,{ fish_id: fish.id }));
 
-        } catch ( error ) {
-            console.error(error);
+        } catch ( error: any) {
+            console.error("[500] Error when creating the fish: " + error.message)
             return response.status(500).json(toObj(response));
         }
     }
