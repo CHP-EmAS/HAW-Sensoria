@@ -51,7 +51,6 @@ class API {
       contentSecurityPolicy: {
         useDefaults: false,
         directives: {
-          defaultSrc: ["'self'"],
           scriptSrc: ["'self'", "'wasm-unsafe-eval'"],
         },
       },
