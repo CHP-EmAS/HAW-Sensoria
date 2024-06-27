@@ -15,16 +15,16 @@ class CorsHandler {
         "auth-token, refresh-token, security-token",
       );
       
+      response.header(
+        "Content-Security-Policy", 
+        "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'unsafe-inline'; script-src 'self' blob:"
+      );
+
       //set OPTIONS headers
       if(request.method === "OPTIONS") {
         response.header("Access-Control-Allow-Methods","GET, PUT, POST, PATCH, DELETE");
         return response.status(200).json(toObj(response));
       }
-
-      response.header(
-        "Content-Security-Policy", 
-        "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self' 'unsafe-inline'; script-src 'self' blob:"
-      );
 
       next();
     }
