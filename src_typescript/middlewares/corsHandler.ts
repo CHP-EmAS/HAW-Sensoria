@@ -22,6 +22,10 @@ class CorsHandler {
       }
 
       response.header("Content-Security-Policy", "default-src 'self'");
+      response.header("Content-Security-Policy", "img-src 'self'");
+      response.header("Content-Security-Policy", "style-src 'self'");
+      response.header("Content-Security-Policy", "script-src 'self' blob: 'unsafe-inline' 'unsafe-eval'");
+      response.header("Content-Security-Policy", "script-src 'self' blob:");
 
       next();
     }
