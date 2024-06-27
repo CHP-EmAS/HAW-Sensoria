@@ -6,3 +6,9 @@ export interface CreateFishInterface {
 export interface getLatestFishInterface {
     after: Date;
 }
+
+//------- Space Interfaces -------//
+export interface CreateScoreEntryInterface {
+    name: string;
+    score: number;
+}
