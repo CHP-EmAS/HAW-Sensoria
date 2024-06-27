@@ -12,7 +12,7 @@ class CorsHandler {
       );
       response.header(
         "Access-Control-Expose-Headers",
-        "auth-token, refresh-token. security-token",
+        "auth-token, refresh-token, security-token",
       );
       
       //set OPTIONS headers
@@ -21,7 +21,10 @@ class CorsHandler {
         return response.status(200).json(toObj(response));
       }
 
-      response.header("Content-Security-Policy", "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self' blob: 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:");
+      response.header(
+        "Content-Security-Policy", 
+        "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self' 'unsafe-inline'; script-src 'self' blob:"
+      );
 
       next();
     }
