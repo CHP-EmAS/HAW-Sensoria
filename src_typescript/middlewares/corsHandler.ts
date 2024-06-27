@@ -21,6 +21,8 @@ class CorsHandler {
         return response.status(200).json(toObj(response));
       }
 
+      response.header("Content-Security-Policy", "default-src 'self'");
+
       next();
     }
 }
