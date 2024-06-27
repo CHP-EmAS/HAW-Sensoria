@@ -15,11 +15,6 @@ class CorsHandler {
         "auth-token, refresh-token, security-token",
       );
       
-      response.header(
-        "Content-Security-Policy", 
-        "script-src 'unsafe-inline'"
-      );
-
       //set OPTIONS headers
       if(request.method === "OPTIONS") {
         response.header("Access-Control-Allow-Methods","GET, PUT, POST, PATCH, DELETE");

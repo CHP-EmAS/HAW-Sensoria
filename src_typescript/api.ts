@@ -47,7 +47,15 @@ class API {
     this.api.use(CorsHandler.cors);
 
     //helmet secure
-    this.api.use(helmet())
+    this.api.use(helmet({
+      contentSecurityPolicy: {
+        useDefaults: false,
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'"],
+        },
+      },
+    }))
 
     //bodyParser
     this.api.use(bodyParser.urlencoded({ extended: false }));
