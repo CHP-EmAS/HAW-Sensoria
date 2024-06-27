@@ -17,7 +17,7 @@ class CorsHandler {
       
       response.header(
         "Content-Security-Policy", 
-        "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'unsafe-inline'; script-src 'self' blob:"
+        "script-src 'unsafe-inline'"
       );
 
       //set OPTIONS headers
