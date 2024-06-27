@@ -52,7 +52,7 @@ class API {
         useDefaults: false,
         directives: {
           defaultSrc: ["'self'"],
-          scriptSrc: ["'self'"],
+          scriptSrc: ["'self'", "'wasm-unsafe-eval'"],
         },
       },
     }))
