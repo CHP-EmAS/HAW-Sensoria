@@ -25,14 +25,14 @@ class FishController {
                 return response.status(200).json(toObj(response,{fishes: fishes}));
             }
 
-            console.log("Returning Fish after " + request.query.after.toString() + "...");
+            console.log("Returning Fish after ID " + request.query.after.toString() + "...");
 
-            const requestParams: getLatestFishInterface = {after: new Date(request.query.after.toString())};
+            const requestParams: getLatestFishInterface = {after: Number(request.query.after)};
 
             const fishes: (Array<FishModel> | null) = await FishModel.findAll({
                 where: {
-                    created_at: {
-                        [Op.gte]: requestParams.after.toUTCString(),
+                    id: {
+                        [Op.gt]: requestParams.after,
                     }
                         
                 }
@@ -86,8 +86,6 @@ class FishController {
         console.log("Creating new fish...\nData: " + requestParams.raw_data);
 
         let fish = new FishModel();
-
-        fish.id = uuidv4();
 
         try {
             JSON.parse(requestParams.raw_data);

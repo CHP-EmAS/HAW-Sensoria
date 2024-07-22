@@ -4,7 +4,7 @@ import { database, databaseSchema } from "../config/database";
 
 //------- Class for Fish Model-------//
 export class FishModel extends Model {
-    public id!: string;
+    public id!: number;
     public raw_data!: string;
     public readonly created_at!: Date;
 }
@@ -13,7 +13,7 @@ export class FishModel extends Model {
 FishModel.init(
 {
     id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false
     },
