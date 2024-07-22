@@ -15,7 +15,7 @@ FishModel.init(
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        
+        autoIncrement: true
     },
     raw_data: {
         type: DataTypes.TEXT,
