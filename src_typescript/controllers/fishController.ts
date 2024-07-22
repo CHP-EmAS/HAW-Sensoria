@@ -41,7 +41,7 @@ class FishController {
             console.log("[200] " + fishes.length + " Fish returned! Listing...");
 
             fishes.forEach(fish => {
-                console.log("- " + fish.id + ", created_at: " + fish.created_at.toUTCString() + "\n     - Data: " + fish.raw_data);
+                console.log("- " + fish.id + ", created_at: " + fish.created_at + "\n     - Data: " + fish.raw_data);
             });
 
             return response.status(200).json(toObj(response,{fishes: fishes}));
